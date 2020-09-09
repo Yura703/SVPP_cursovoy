@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -21,11 +22,25 @@ namespace Project_WPF
     public partial class TestWindow : Window
     {
         ObservableCollection<Question> Questions;
+        
+        int ticketTrue = 0;
+        int ticketFalse = 0;
+        int ticket = 1;
+        
+
         public TestWindow()
         {
             InitializeComponent();
-            Questions = new ObservableCollection<Question>();
-            lb_quest.DataContext = Questions;
+            Questions = new ObservableCollection<Question>();            
+            tbNTicket.DataContext = ticket;
+            tbTr.DataContext = ticketTrue;
+            tbFls.DataContext = ticketFalse;
+            grid.DataContext = Questions;          
+                      
+            cbVar.Items.Add("1");
+            cbVar.Items.Add("2");
+            cbVar.Items.Add("3");
+
         }
         
         private void testirorovanie()
@@ -64,12 +79,23 @@ namespace Project_WPF
             this.Close();
         }
 
-        //using(ModelEDM edm = new ModelEDM())
-        //{
+       
 
-        //}
+        private void ComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+                      
+            using (ModelEDM db = new ModelEDM())
+            {
+                var command = db.Database.SqlQuery<Question>("SELECT * FROM Questions WHERE Var = '" + cbVar.Text + "'");
+                foreach (var aa in command)
+                {
+                    //lb_answer1.Text = aa.Variant1;
+                    //MessageBox.Show(aa.Variant1);
 
+                }
+            }
 
+        }
 
     }
 }
