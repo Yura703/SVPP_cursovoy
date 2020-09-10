@@ -39,7 +39,6 @@ e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\bin\Debug\EntityFramework.dll
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\bin\Debug\EntityFramework.SqlServer.dll
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\bin\Debug\EntityFramework.xml
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\bin\Debug\EntityFramework.SqlServer.xml
-e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csprojAssemblyReference.cache
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\CustomizationWindow.g.cs
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\EmployeeWindow.g.cs
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\ExamWindow.g.cs

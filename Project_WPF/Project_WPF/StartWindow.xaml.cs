@@ -32,7 +32,8 @@ namespace Project_WPF
 
         private void exam_Click(object sender, RoutedEventArgs e)
         {
-
+            ExamWindow examWindow = new ExamWindow();
+            examWindow.Show();
         }
 
         private void Employee_Click(object sender, RoutedEventArgs e)

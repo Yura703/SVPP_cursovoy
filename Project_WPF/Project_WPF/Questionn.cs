@@ -4,6 +4,7 @@ namespace Project_WPF
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Spatial;
 
     public partial class Questionn
@@ -48,6 +49,11 @@ namespace Project_WPF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Test> Tests2 { get; set; }
+
+        public static explicit operator Questionn(DbRawSqlQuery<Questionn> v)
+        {
+            throw new NotImplementedException();
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Test> Tests3 { get; set; }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_WPF"
         mc:Ignorable="d"
-         Title="login" Height="300" Width="500">
+         Title="login" Height="300" Width="500" Background="#FFA3E6ED">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>

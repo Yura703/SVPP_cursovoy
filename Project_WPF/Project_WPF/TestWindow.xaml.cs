@@ -22,67 +22,52 @@ namespace Project_WPF
     /// </summary>
     public partial class TestWindow : Window, INotifyPropertyChanged
     {
-        
-        ObservableCollection<Questionn> Questions;
-        
+        List<Questionn> list = new List<Questionn>();
         int ticketTrue = 0;//сделать мнгновенное обновление связи после изменения, (NotifyPropertyChanged) не работает
         int ticketFalse = 0;
-        int ticket = 1;
+        int ticket = 0;
         int answer;
-        string Nticket;
-        
-
-
-
+        string Nticket;   
 
         public TestWindow()
         {
             InitializeComponent();
-            Questions = new ObservableCollection<Questionn>();            
+            List<Questionn> list = new List<Questionn>();
             tbNTicket.DataContext = ticket;
             tbTr.DataContext = ticketTrue;
-            tbFls.DataContext = ticketFalse;
-            grid.DataContext = Questions;          
-                      
-           
+            tbFls.DataContext = ticketFalse;            
         }
 
         private void test_Click(object sender, RoutedEventArgs e)
         {
-            using (ModelEDM db = new ModelEDM())
+            if ((answer == 1 && radBut1.IsChecked == true) || (answer == 2 && radBut2.IsChecked == true) || (answer == 3 && radBut3.IsChecked == true))
             {
-                var command = db.Database.SqlQuery<Questionn>("SELECT * FROM Questions WHERE Var = '" + Nticket + "'");
-
-                foreach (var aa in command)
-                {
-                    tb_quest.Text = aa.Question;
-                    tb_answer1.Text = aa.Variant1;
-                    tb_answer2.Text = aa.Variant2;
-                    tb_answer3.Text = aa.Variant3;
-                    answer = aa.Answer;
-                    //while(true)
-                    //{
-                    //    if (test.IsPressed) break;
-                    //}
-
-                    //пауза пока не отработает событие нажатия кнопки
-                    if ((answer == 1 && radBut1.IsChecked == true) || (answer == 2 && radBut2.IsChecked == true) || (answer == 3 && radBut3.IsChecked == true))
-                    {
-                        MessageBox.Show("Правильный ответ");
-                        ticketTrue++;
-                        this.OnPropertyChanged("ticketTrue");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неправильный ответ");
-                        ticketFalse++;
-                        this.OnPropertyChanged("ticketFalse");
-                    }
-                    ticket++;
-                    this.OnPropertyChanged("ticket");
-
-                }
+                MessageBox.Show("Правильный ответ");
+                ticketTrue++;
+                this.OnPropertyChanged("ticketTrue");
             }
+            else
+            {
+                MessageBox.Show("Неправильный ответ");
+                ticketFalse++;
+                this.OnPropertyChanged("ticketFalse");
+            }
+            ticket++;
+            this.OnPropertyChanged("ticket");
+
+            if (list.Count != 0)
+            {
+            tb_quest.Text = list[ticket].Question;
+            tb_answer1.Text = list[ticket].Variant1;
+            tb_answer2.Text = list[ticket].Variant2;
+            tb_answer3.Text = list[ticket].Variant3;
+            answer = list[ticket].Answer;
+            }
+            else MessageBox.Show("Выберите существующий вариант");
+            tbNTicket.Text = ticket.ToString();
+            tbTr.Text = ticketTrue.ToString();
+            tbFls.Text = ticketFalse.ToString();
+
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
@@ -90,57 +75,34 @@ namespace Project_WPF
             this.Close();
         }
 
-       
-
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
+            if(list!=null)list.Clear();
+            ticket = 0;
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
             cbVar.Text = selectedItem.Content.ToString();// все равно выбор не виден на комбобоксе
             Nticket = selectedItem.Content.ToString();
+            using (ModelEDM db = new ModelEDM())
+            {
+                var command = db.Database.SqlQuery<Questionn>("SELECT * FROM Questions WHERE Var = '" + Nticket + "'");
+                                
+                foreach (var aa in command)
+                {
+                    list.Add(aa);     
+                }
+            }
 
-
-            //using (ModelEDM db = new ModelEDM())
-            //{   
-            //    var command = db.Database.SqlQuery<Questionn>("SELECT * FROM Questions WHERE Var = '" + selectedItem.Content.ToString() + "'");
-            //    //foreach (var aa in command)   
-            //    //{
-            //    //    tb_quest.Text = aa.Question;
-            //    //    tb_answer1.Text = aa.Variant1;
-            //    //    tb_answer2.Text = aa.Variant2;
-            //    //    tb_answer3.Text = aa.Variant3;
-            //    //    answer = aa.Answer;
-            //    //    //while(true)
-            //    //    //{
-            //    //    //    if (test.IsPressed) break;
-            //    //    //}
-
-            //    //    //пауза пока не отработает событие нажатия кнопки
-            //    //    if ((answer == 1 && radBut1.IsChecked == true) || (answer == 2 && radBut2.IsChecked == true) || (answer == 3 && radBut3.IsChecked == true))
-            //    //    {
-            //    //        MessageBox.Show("Правильный ответ");
-            //    //        ticketTrue++;
-            //    //        this.OnPropertyChanged("ticketTrue");
-            //    //    }
-            //    //    else
-            //    //    {
-            //    //        MessageBox.Show("Неправильный ответ");
-            //    //        ticketFalse++;
-            //    //        this.OnPropertyChanged("ticketFalse");
-            //    //    }
-            //    //    ticket++;
-            //    //    this.OnPropertyChanged("ticket");
-            //        //this test_Click();
-
-            //        //MessageBox.Show("");
-
-
-
-
-
-            //    //}
-            //}
-
+            if (list.Count != 0)
+            {
+                tb_quest.Text = list[ticket].Question;
+                tb_answer1.Text = list[ticket].Variant1;
+                tb_answer2.Text = list[ticket].Variant2;
+                tb_answer3.Text = list[ticket].Variant3;
+                answer = list[ticket].Answer;
+            }
+            else MessageBox.Show("Выберите существующий вариант");
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

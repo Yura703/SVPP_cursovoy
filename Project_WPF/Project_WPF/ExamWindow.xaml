@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_WPF"
         mc:Ignorable="d"
-        Title="ExamWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="ExamWindow" Height="600" Width="1000" Background="#FFB2EEB0">
+    <Window.Resources>
+        <Style x:Key="Front">
+            <Setter Property="Control.FontSize" Value="16" />
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="grid" Margin="10,10,20,10" Style="{StaticResource Front}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="stackPanel" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <TextBox Text="  Для начала экзаимена введите табельный номер" VerticalAlignment="Center"/>   
+            <TextBox x:Name="tbTabel" Width="60" Margin="20,7,0,7"/>
+            <Button x:Name="start" Content="Начать экзамен" Margin="100,5,10,5" RenderTransformOrigin="0.502,0.5" Click="start_Click"/>
+            <TextBlock Text="      Вопрос" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tbNtic" Width="40" Margin="20,7,0,7" Text="{Binding Mode=OneWay}"/>
+        </StackPanel>
+
+        <Button x:Name="test" Content="Ответить" Grid.Column="1" HorizontalAlignment="Left" Margin="90.8,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100" Click="test_Click" Grid.ColumnSpan="1" Height="25"/>
+        <Button x:Name="exit" Content="Выход" Grid.Column="1" HorizontalAlignment="Left" Margin="686.4,10.4,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100" Click="exit_Click" Height="25"/>
+        <RadioButton x:Name="radBut1" GroupName="_test" IsChecked="True" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="14" Width="15"/>
+        <RadioButton x:Name="radBut2" GroupName="_test" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="13" Width="15"/>
+        <RadioButton x:Name="radBut3" GroupName="_test" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Height="14" Width="15"/>
+        <TextBox x:Name="tb_quest" Height="60" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0,20,0,0" Background="#FFE3E9F0"/>
+        <TextBox x:Name="tb_answer1" Height="70" Grid.Row="2"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FFDDE4EB"/>
+        <TextBox x:Name="tb_answer2" Height="70" Grid.Row="3"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FFE1E8EE"/>
+        <TextBox x:Name="tb_answer3" Height="70" Grid.Row="4"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FFE5EAF0"/>
+
+
     </Grid>
 </Window>
+

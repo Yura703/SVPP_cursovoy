@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,25 @@ namespace Project_WPF
     /// </summary>
     public partial class EmployeeWindow : Window
     {
+        ObservableCollection<Employee> empl = new ObservableCollection<Employee>();
+
         public EmployeeWindow()
         {
             using (ModelEDM db = new ModelEDM())
             {
-                db.Employees.Load();
-                dGrid.DataContext = db.Employees.Local;
+                var command = db.Database.SqlQuery<Employee>("SELECT * FROM Employee");
+
+                foreach (var aa in command)
+                {
+                    empl.Add(aa);
+                    //MessageBox.Show(aa.FIO);
+                }
+                //db.Employees.Load();
+                //dGrid.DataContext = db.Employees.Local;
+
             }
             InitializeComponent();
+            dGrid.DataContext = empl;
             //InitExployeeList();
         }
 
