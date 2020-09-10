@@ -6,10 +6,10 @@ namespace Project_WPF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Question
+    public partial class Questionn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Question()
+        public Questionn()
         {
             Tests = new HashSet<Test>();
             Tests1 = new HashSet<Test>();
@@ -22,7 +22,7 @@ namespace Project_WPF
 
         [Column("Question", TypeName = "ntext")]
         [Required]
-        public string Question1 { get; set; }
+        public string Question { get; set; }// public string Question1 { get; set; }
 
         [Column(TypeName = "ntext")]
         [Required]

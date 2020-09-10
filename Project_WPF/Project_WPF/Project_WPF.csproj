@@ -81,7 +81,7 @@
       <DependentUpon>ExamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelEDM.cs" />
-    <Compile Include="Question.cs" />
+    <Compile Include="Questionn.cs" />
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>

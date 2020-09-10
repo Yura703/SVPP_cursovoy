@@ -23,8 +23,12 @@
 
         <StackPanel x:Name="stackPanel" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBox Text="Выберите вариант для тренировки   "/>
-            <ComboBox Name="cbVar" SelectionChanged ="ComboBox_Selected" Width="30"/>
-           
+            <ComboBox Name="cbVar" SelectionChanged ="ComboBox_Selected" Width="60">
+                <ComboBoxItem  Content="1"/>
+                <ComboBoxItem  Content="2"/>
+                <ComboBoxItem  Content="3"/>
+            </ComboBox>
+
             <TextBlock Text="   Вопрос "/>
             <TextBox x:Name="tbNTicket" Width="30" Text="{Binding Mode=OneWay}"/>
             <TextBlock HorizontalAlignment="Center" Text="        Верных ответов" Width="120" Foreground="Green"/>
@@ -35,13 +39,13 @@
 
         <Button x:Name="test" Content="Ответить" Grid.Column="1" HorizontalAlignment="Left" Margin="10.2,10.4,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Click="test_Click" Grid.ColumnSpan="1" Height="19"/>
         <Button x:Name="exit" Content="Выход" Grid.Column="1" HorizontalAlignment="Left" Margin="686.4,10.4,0,0" Grid.Row="6" VerticalAlignment="Top" Width="75" Click="exit_Click" Height="19"/>
-        <RadioButton x:Name="radBut1" GroupName="test" IsChecked="True" HorizontalAlignment="Left" Margin="10,74.8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="14" Width="15"/>
-        <RadioButton x:Name="radBut2" GroupName="test" HorizontalAlignment="Left" Margin="10,71,0,0" Grid.Row="4" VerticalAlignment="Top" Height="13" Width="15"/>
-        <RadioButton x:Name="radBut3" GroupName="test" HorizontalAlignment="Left" Margin="10,72.2,0,0" Grid.Row="5" VerticalAlignment="Top" Height="14" Width="15"/>
-        <ListBox x:Name="lb_quest" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" ItemsSource="{Binding}" Margin="1.4,0,-0.4,0.2"/>
-        <TextBox x:Name="lb_answer1" Grid.Row="3"  Grid.Column="1" Grid.ColumnSpan="2" Margin="2.2,1.8,1.6,2"/>
-        <ListBox x:Name="lb_answer2" Grid.Row="4"  Grid.Column="1" Grid.ColumnSpan="2" Margin="2.2,2,1.6,1.8"/>
-        <ListBox x:Name="lb_answer3" Grid.Row="5"  Grid.Column="1" Grid.ColumnSpan="2" Margin="2.2,2.2,1.6,1.6"/>
+        <RadioButton x:Name="radBut1" GroupName="_test" IsChecked="True" HorizontalAlignment="Left" Margin="10,74.8,0,0" Grid.Row="3" VerticalAlignment="Top" Height="14" Width="15"/>
+        <RadioButton x:Name="radBut2" GroupName="_test" HorizontalAlignment="Left" Margin="10,71,0,0" Grid.Row="4" VerticalAlignment="Top" Height="13" Width="15"/>
+        <RadioButton x:Name="radBut3" GroupName="_test" HorizontalAlignment="Left" Margin="10,72.2,0,0" Grid.Row="5" VerticalAlignment="Top" Height="14" Width="15"/>
+        <TextBox x:Name="tb_quest" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="tb_answer1" Grid.Row="3"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="tb_answer2" Grid.Row="4"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="tb_answer3" Grid.Row="5"  Grid.Column="1" VerticalAlignment="Center"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
 
 
     </Grid>

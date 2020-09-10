@@ -16,7 +16,7 @@ namespace Project_WPF
         public virtual DbSet<Comission> Comissions { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Questionn> Questions { get; set; }
         public virtual DbSet<Storage> Storages { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
@@ -56,25 +56,25 @@ namespace Project_WPF
                 .WithRequired(e => e.Employee)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Question>()
+            modelBuilder.Entity<Questionn>()
                 .HasMany(e => e.Tests)
                 .WithRequired(e => e.Question)
                 .HasForeignKey(e => e.Questions_1)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Question>()
+            modelBuilder.Entity<Questionn>()
                 .HasMany(e => e.Tests1)
                 .WithRequired(e => e.Question1)
                 .HasForeignKey(e => e.Questions_2)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Question>()
+            modelBuilder.Entity<Questionn>()
                 .HasMany(e => e.Tests2)
                 .WithRequired(e => e.Question2)
                 .HasForeignKey(e => e.Questions_3)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Question>()
+            modelBuilder.Entity<Questionn>()
                 .HasMany(e => e.Tests3)
                 .WithRequired(e => e.Question3)
                 .HasForeignKey(e => e.Questions_4)

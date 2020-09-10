@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,56 +20,66 @@ namespace Project_WPF
     /// <summary>
     /// Логика взаимодействия для TestWindow.xaml
     /// </summary>
-    public partial class TestWindow : Window
+    public partial class TestWindow : Window, INotifyPropertyChanged
     {
-        ObservableCollection<Question> Questions;
         
-        int ticketTrue = 0;
+        ObservableCollection<Questionn> Questions;
+        
+        int ticketTrue = 0;//сделать мнгновенное обновление связи после изменения, (NotifyPropertyChanged) не работает
         int ticketFalse = 0;
         int ticket = 1;
+        int answer;
+        string Nticket;
         
+
+
+
 
         public TestWindow()
         {
             InitializeComponent();
-            Questions = new ObservableCollection<Question>();            
+            Questions = new ObservableCollection<Questionn>();            
             tbNTicket.DataContext = ticket;
             tbTr.DataContext = ticketTrue;
             tbFls.DataContext = ticketFalse;
             grid.DataContext = Questions;          
                       
-            cbVar.Items.Add("1");
-            cbVar.Items.Add("2");
-            cbVar.Items.Add("3");
-
+           
         }
-        
-        private void testirorovanie()
-        {
-            using (ModelEDM db = new ModelEDM())
-            {
-                var command = db.Database.SqlQuery<Question>("SELECT * FROM Question");
-                foreach (var aa in command)
-                {
-                    Questions.Add(aa);
-                    
-                }                
-            }
-        }
-
-        
 
         private void test_Click(object sender, RoutedEventArgs e)
         {
-
             using (ModelEDM db = new ModelEDM())
             {
+                var command = db.Database.SqlQuery<Questionn>("SELECT * FROM Questions WHERE Var = '" + Nticket + "'");
 
-                var command = db.Database.SqlQuery<Question>("SELECT * FROM Questions WHERE Questions_id = 1");
                 foreach (var aa in command)
                 {
-                    //lb_answer1.Text = aa.Variant1;
-                    MessageBox.Show("1111");
+                    tb_quest.Text = aa.Question;
+                    tb_answer1.Text = aa.Variant1;
+                    tb_answer2.Text = aa.Variant2;
+                    tb_answer3.Text = aa.Variant3;
+                    answer = aa.Answer;
+                    //while(true)
+                    //{
+                    //    if (test.IsPressed) break;
+                    //}
+
+                    //пауза пока не отработает событие нажатия кнопки
+                    if ((answer == 1 && radBut1.IsChecked == true) || (answer == 2 && radBut2.IsChecked == true) || (answer == 3 && radBut3.IsChecked == true))
+                    {
+                        MessageBox.Show("Правильный ответ");
+                        ticketTrue++;
+                        this.OnPropertyChanged("ticketTrue");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неправильный ответ");
+                        ticketFalse++;
+                        this.OnPropertyChanged("ticketFalse");
+                    }
+                    ticket++;
+                    this.OnPropertyChanged("ticket");
 
                 }
             }
@@ -83,18 +94,60 @@ namespace Project_WPF
 
         private void ComboBox_Selected(object sender, RoutedEventArgs e)
         {
-                      
-            using (ModelEDM db = new ModelEDM())
-            {
-                var command = db.Database.SqlQuery<Question>("SELECT * FROM Questions WHERE Var = '" + cbVar.Text + "'");
-                foreach (var aa in command)
-                {
-                    //lb_answer1.Text = aa.Variant1;
-                    //MessageBox.Show(aa.Variant1);
+            ComboBox comboBox = (ComboBox)sender;
+            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            cbVar.Text = selectedItem.Content.ToString();// все равно выбор не виден на комбобоксе
+            Nticket = selectedItem.Content.ToString();
 
-                }
-            }
 
+            //using (ModelEDM db = new ModelEDM())
+            //{   
+            //    var command = db.Database.SqlQuery<Questionn>("SELECT * FROM Questions WHERE Var = '" + selectedItem.Content.ToString() + "'");
+            //    //foreach (var aa in command)   
+            //    //{
+            //    //    tb_quest.Text = aa.Question;
+            //    //    tb_answer1.Text = aa.Variant1;
+            //    //    tb_answer2.Text = aa.Variant2;
+            //    //    tb_answer3.Text = aa.Variant3;
+            //    //    answer = aa.Answer;
+            //    //    //while(true)
+            //    //    //{
+            //    //    //    if (test.IsPressed) break;
+            //    //    //}
+
+            //    //    //пауза пока не отработает событие нажатия кнопки
+            //    //    if ((answer == 1 && radBut1.IsChecked == true) || (answer == 2 && radBut2.IsChecked == true) || (answer == 3 && radBut3.IsChecked == true))
+            //    //    {
+            //    //        MessageBox.Show("Правильный ответ");
+            //    //        ticketTrue++;
+            //    //        this.OnPropertyChanged("ticketTrue");
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        MessageBox.Show("Неправильный ответ");
+            //    //        ticketFalse++;
+            //    //        this.OnPropertyChanged("ticketFalse");
+            //    //    }
+            //    //    ticket++;
+            //    //    this.OnPropertyChanged("ticket");
+            //        //this test_Click();
+
+            //        //MessageBox.Show("");
+
+
+
+
+
+            //    //}
+            //}
+
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string prop)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
     }
