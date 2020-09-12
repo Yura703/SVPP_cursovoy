@@ -6,7 +6,7 @@ namespace Project_WPF
     using System.Linq;
 
     public partial class ModelEDM : DbContext
-    {
+    { 
         public ModelEDM()
             : base("name=ModelEDM")
         {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_WPF"
         mc:Ignorable="d"
-        Title="EmployeeWindow" Height="450" Width="800">
+        Title="EmployeeWindow" Height="700" Width="1400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -51,12 +51,12 @@
                 <DataGridTextColumn Header="Ф.И.О" Binding="{Binding FIO}" Width="*">
                     <DataGridTextColumn.CellStyle>
                         <Style>
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Должность" Binding="{Binding position}"/>
-            <DataGridTextColumn Header="Подразделение" Binding="{Binding department}"/>
+                <DataGridTextColumn Header="Должность" Binding="{Binding _title}"/>
+                <DataGridTextColumn Header="Подразделение" Binding="{Binding _department}"/>
             </DataGrid.Columns>
         </DataGrid>
 

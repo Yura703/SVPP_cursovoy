@@ -21,18 +21,25 @@ namespace Project_WPF
     /// </summary>
     public partial class EmployeeWindow : Window
     {
-        ObservableCollection<Employee> empl = new ObservableCollection<Employee>();
+        ObservableCollection<EmployeeTwin> empl = new ObservableCollection<EmployeeTwin>();
 
         public EmployeeWindow()
         {
-            using (ModelEDM db = new ModelEDM())
+            using (ModelEDM db = new ModelEDM())//как добавить в датагрид цех и специальность, в классе они int (FK)?
             {
-                var command = db.Database.SqlQuery<Employee>("SELECT * FROM Employee");
-
+                //EmployeeTwin employeeTwin = new EmployeeTwin();
+                // var command = db.Database.SqlQuery<Employee>("SELECT * FROM Employee");
+                var command = db.Employees.ToList();
+                
                 foreach (var aa in command)
                 {
-                    empl.Add(aa);
-                    //MessageBox.Show(aa.FIO);
+                    //employeeTwin.Tabel_id = aa.Tabel_id;
+                    //employeeTwin.FIO = aa.FIO;
+                    //employeeTwin._department = aa.Department.dep_name;
+                    //employeeTwin._title = aa.Title.title_name;
+                    //empl.Add(employeeTwin);
+
+                    //MessageBox.Show(aa.Title.title_name);
                 }
                 //db.Employees.Load();
                 //dGrid.DataContext = db.Employees.Local;

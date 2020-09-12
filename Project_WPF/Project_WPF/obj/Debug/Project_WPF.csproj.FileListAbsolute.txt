@@ -65,3 +65,4 @@ e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csproj.CoreCo
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csproj.CopyComplete
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.exe
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.pdb
+E:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csprojAssemblyReference.cache
