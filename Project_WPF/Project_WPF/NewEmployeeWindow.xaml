@@ -1,0 +1,41 @@
+﻿<Window x:Class="Project_WPF.NewEmployeeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_WPF"
+        mc:Ignorable="d"
+        Title="NewEmployeeWindow" Height="400" Width="380">
+    <Window.Resources>
+        <Style x:Key="Front">
+            <Setter Property="Control.FontSize" Value="18" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <StackPanel Orientation="Vertical" Style="{StaticResource Front}">
+            <Label Content="Введите данные" Foreground="Red" HorizontalContentAlignment="Center"/>
+            <Label/>
+            <TextBlock Text="Табельный номер:" Width="250"/>
+            <TextBox x:Name="tbTabel" Width="250"/>
+            <TextBlock Text="ФИО:" Width="250"/>
+            <TextBox x:Name="tbFIO" Width="250"/>
+            <TextBlock Text="Подразделение:" Width="250"/>
+            <ComboBox x:Name="cbDep" Width="250"/>
+            <TextBlock Text="Специальность" Width="250"/>
+            <ComboBox x:Name="cbTitle" Width="250"/>
+            <Label Height="30"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="bSave" Content="Сохранить" Margin="45,0,0,0" Click="bSave_Click"/>
+                <Button x:Name="bCancel" Content="Отменить" Margin="75,0,0,0" Click="bCancel_Click"/>
+            </StackPanel>
+
+
+
+
+
+
+
+        </StackPanel>
+    </Grid>
+</Window>

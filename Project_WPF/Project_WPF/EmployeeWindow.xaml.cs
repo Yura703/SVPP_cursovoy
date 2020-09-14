@@ -22,60 +22,95 @@ namespace Project_WPF
     public partial class EmployeeWindow : Window
     {
         ObservableCollection<EmployeeTwin> empl = new ObservableCollection<EmployeeTwin>();
+        ObservableCollection<EmployeeTwin> _empl = new ObservableCollection<EmployeeTwin>();
 
         public EmployeeWindow()
         {
+            List <string> list = new List <string>();
             using (ModelEDM db = new ModelEDM())//как добавить в датагрид цех и специальность, в классе они int (FK)?
             {
-                //EmployeeTwin employeeTwin = new EmployeeTwin();
-                // var command = db.Database.SqlQuery<Employee>("SELECT * FROM Employee");
                 var command = db.Employees.ToList();
-                
                 foreach (var aa in command)
                 {
-                    //employeeTwin.Tabel_id = aa.Tabel_id;
-                    //employeeTwin.FIO = aa.FIO;
-                    //employeeTwin._department = aa.Department.dep_name;
-                    //employeeTwin._title = aa.Title.title_name;
-                    //empl.Add(employeeTwin);
-
-                    //MessageBox.Show(aa.Title.title_name);
+                    EmployeeTwin employeeTwin = new EmployeeTwin();
+                    employeeTwin.Tabel_id = aa.Tabel_id;
+                    employeeTwin.FIO = aa.FIO;
+                    employeeTwin.department = aa.Department.dep_name;
+                    employeeTwin.title = aa.Title.title_name;
+                    employeeTwin.Notes = aa.Notes;
+                    employeeTwin.NamberComission = (int)aa.NamberComission;
+                    employeeTwin.NamberVariant = (int)aa.Title.var_id;
+                    empl.Add(employeeTwin);                   
                 }
-                //db.Employees.Load();
-                //dGrid.DataContext = db.Employees.Local;
-
+                
+                var comm = db.Departments.ToList();
+                foreach (var aaa in comm)
+                {
+                    list.Add(aaa.dep_name);
+                }
             }
+            _empl = empl;
             InitializeComponent();
             dGrid.DataContext = empl;
-            //InitExployeeList();
+            foreach (var a in list)
+            {
+                cbDep.Items.Add(a);
+            }     
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            using (ModelEDM db = new ModelEDM())
-            {
-                //var command = db.Database.SqlQuery<Employee>("SELECT * FROM Employee");
-                //foreach (var ss in command)
-                //{
-                //    MessageBox.Show(ss.FIO);
-                //}
-                db.Employees.Load();
-                dGrid.DataContext = db.Employees.Local;
-
-            }
-
-
+            empl = _empl;
         }
-
-        //private void InitExployeeList()
-        //{
-        //    db.Employees.Load();
-        //    dGrid.DataContext = context.Employees.Local;
-        //}
-
+        
         private void dGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             e.Row.Header = e.Row.GetIndex() + 1;
+        }
+
+        private void ComboBox_Selected(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            //comboBox.SelectedItem.ToString;
+            string dep = comboBox.SelectedItem.ToString();
+            //ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            //string dep = selectedItem.Content.ToString();
+            //BindingOperations.ClearAllBindings(dGrid);
+            ObservableCollection<EmployeeTwin> __empl = new ObservableCollection<EmployeeTwin>();
+            foreach (var item in empl)
+            {
+                if (item.department == dep) __empl.Add(item);
+            }
+            empl = __empl;
+
+
+            dGrid.Items.Refresh();
+        }
+
+        private void addEmpl_Click(object sender, RoutedEventArgs e)
+        {
+            Employee employee = new Employee();
+            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow(employee);
+            var result = newEmployeeWindow.ShowDialog();
+            
+        }
+
+        private void delEmpl_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы уверены?", "Удалить запись", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Employee empl = dGrid.SelectedItem as Employee;
+                context.Employees.Remove(empl);
+                context.SaveChanges();
+            }
+            
+        }
+
+        private void editEmpl_Click(object sender, RoutedEventArgs e)
+        {
+            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow();
+            newEmployeeWindow.ShowDialog();
         }
     }
 }

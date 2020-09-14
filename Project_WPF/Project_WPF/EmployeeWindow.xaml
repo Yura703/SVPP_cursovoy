@@ -25,7 +25,7 @@
             <Label Content="Фамилия"/>
             <TextBox x:Name="Famil" BorderBrush="Black"/>
             <Label Content="Цех"/>
-            <ComboBox Name="cbDep" BorderBrush="Black"/>
+            <ComboBox Name="cbDep" BorderBrush="Black" SelectionChanged ="ComboBox_Selected"/>
             <Label Height="30"/>
             <Button x:Name="Clear" Content="Очистить" Click="Clear_Click" Margin="10,0,10,0"/>
         </StackPanel>
@@ -44,7 +44,7 @@
             <MenuItem Header="View" ></MenuItem>
         </Menu>
 
-        <DataGrid x:Name="dGrid" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" 
+        <DataGrid x:Name="dGrid" Grid.Column="0" Grid.Row="1" CanUserAddRows="False" ItemsSource="{Binding}" 
         AutoGenerateColumns="False" LoadingRow="dGrid_LoadingRow" RowHeaderWidth="50" Background="#FFFAFDE1" BorderBrush="Black">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Таб. №" Binding="{Binding Tabel_id}" />
@@ -55,10 +55,15 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Должность" Binding="{Binding _title}"/>
-                <DataGridTextColumn Header="Подразделение" Binding="{Binding _department}"/>
+                <DataGridTextColumn Header="Должность" Binding="{Binding title}"/>
+                <DataGridTextColumn Header="Подразделение" Binding="{Binding department}"/>
+                <DataGridTextColumn Header="Вариант" Binding="{Binding NamberVariant}"/>
+                <DataGridTextColumn Header="Комиссия" Binding="{Binding NamberComission}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="addEmpl" Content="Добавить работника" HorizontalAlignment="Left" Margin="40,21,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Click="addEmpl_Click"/>
+        <Button x:Name="delEmpl" Content="Удалить работника" HorizontalAlignment="Left" Margin="241,21,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Click="delEmpl_Click"/>
+        <Button x:Name="editEmpl" Content="Редактировать работника" HorizontalAlignment="Left" Margin="462,21,0,0" Grid.Row="2" VerticalAlignment="Top" Width="150" Click="editEmpl_Click"/>
 
     </Grid>
 </Window>

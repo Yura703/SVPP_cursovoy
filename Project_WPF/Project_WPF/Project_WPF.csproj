@@ -82,6 +82,9 @@
       <DependentUpon>ExamWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModelEDM.cs" />
+    <Compile Include="NewEmployeeWindow.xaml.cs">
+      <DependentUpon>NewEmployeeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Questionn.cs" />
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
@@ -128,6 +131,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewEmployeeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

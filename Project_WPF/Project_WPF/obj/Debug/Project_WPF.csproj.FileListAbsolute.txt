@@ -66,3 +66,5 @@ e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csproj.CopyCo
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.exe
 e:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.pdb
 E:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\Project_WPF.csprojAssemblyReference.cache
+E:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\NewEmployeeWindow.g.cs
+E:\GIT\SVPP_cursovoy\Project_WPF\Project_WPF\obj\Debug\NewEmployeeWindow.baml
