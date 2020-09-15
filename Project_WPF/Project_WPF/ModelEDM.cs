@@ -22,6 +22,7 @@ namespace Project_WPF
         public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<Title> Titles { get; set; }
         public virtual DbSet<WrongAnswer> WrongAnswers { get; set; }
+        public virtual DbSet<ViewEmployee> ViewEmployee { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -97,6 +98,14 @@ namespace Project_WPF
                 .HasMany(e => e.Employees)
                 .WithRequired(e => e.Title)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ViewEmployee>()
+               .Property(e => e.dep_name)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<ViewEmployee>()
+                .Property(e => e.title_name)
+                .IsUnicode(false);
         }
     }
 }

@@ -99,6 +99,7 @@
       <DependentUpon>TicketWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Title.cs" />
+    <Compile Include="ViewEmployee.cs" />
     <Compile Include="WrongAnswer.cs" />
     <Page Include="CustomizationWindow.xaml">
       <SubType>Designer</SubType>

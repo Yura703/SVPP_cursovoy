@@ -19,20 +19,30 @@ namespace Project_WPF
     /// </summary>
     public partial class NewEmployeeWindow : Window
     {
+        Employee employee;
         public NewEmployeeWindow(Employee employee)
         {
             InitializeComponent();
+            this.employee = employee;
+            grid.DataContext = employee;
 
         }
 
         private void bSave_Click(object sender, RoutedEventArgs e)
         {
-
+            this.DialogResult = true;
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+        {
+            MessageBox.Show(e.Error.ErrorContent.ToString());
+            TextBox tb = (TextBox)sender;
+            tb.Text = "";
         }
     }
 }

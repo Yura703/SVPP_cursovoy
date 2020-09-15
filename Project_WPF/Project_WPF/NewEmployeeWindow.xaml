@@ -12,16 +12,32 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="20">
+    <Grid x:Name="grid" Margin="20">
         <StackPanel Orientation="Vertical" Style="{StaticResource Front}">
             <Label Content="Введите данные" Foreground="Red" HorizontalContentAlignment="Center"/>
             <Label/>
             <TextBlock Text="Табельный номер:" Width="250"/>
-            <TextBox x:Name="tbTabel" Width="250"/>
+            <TextBox x:Name="tbTabel" Width="250">
+                <TextBox.Text>
+                    <Binding Path="Tabel_id" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <TextBlock Text="ФИО:" Width="250"/>
-            <TextBox x:Name="tbFIO" Width="250"/>
+            <TextBox x:Name="tbFIO" Width="250" Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="FIO" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <TextBlock Text="Подразделение:" Width="250"/>
-            <ComboBox x:Name="cbDep" Width="250"/>
+            <ComboBox x:Name="cbDep" Width="250" />
             <TextBlock Text="Специальность" Width="250"/>
             <ComboBox x:Name="cbTitle" Width="250"/>
             <Label Height="30"/>

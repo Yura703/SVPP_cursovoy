@@ -21,11 +21,13 @@ namespace Project_WPF
     /// </summary>
     public partial class EmployeeWindow : Window
     {
+        ModelEDM context;//********
         ObservableCollection<EmployeeTwin> empl = new ObservableCollection<EmployeeTwin>();
         ObservableCollection<EmployeeTwin> _empl = new ObservableCollection<EmployeeTwin>();
 
         public EmployeeWindow()
         {
+            context = new ModelEDM();//*********
             List <string> list = new List <string>();
             using (ModelEDM db = new ModelEDM())//как добавить в датагрид цех и специальность, в классе они int (FK)?
             {
@@ -51,11 +53,18 @@ namespace Project_WPF
             }
             _empl = empl;
             InitializeComponent();
-            dGrid.DataContext = empl;
+            //dGrid.DataContext = empl;**************
             foreach (var a in list)
             {
                 cbDep.Items.Add(a);
-            }     
+            }
+            InitExployeeList();//*********************
+        }
+
+        private void InitExployeeList()//******************
+        {
+            context.Employees.Load();
+            dGrid.DataContext = context.Employees.Local;
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
@@ -91,8 +100,14 @@ namespace Project_WPF
         {
             Employee employee = new Employee();
             NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow(employee);
-            var result = newEmployeeWindow.ShowDialog();
-            
+            var result = newEmployeeWindow.ShowDialog();                      
+           
+            if (result == true)
+            {
+                context.Employees.Add(employee);
+                context.SaveChanges();
+                newEmployeeWindow.Close();
+            }
         }
 
         private void delEmpl_Click(object sender, RoutedEventArgs e)
@@ -109,8 +124,23 @@ namespace Project_WPF
 
         private void editEmpl_Click(object sender, RoutedEventArgs e)
         {
-            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow();
-            newEmployeeWindow.ShowDialog();
+            Employee employee = dGrid.SelectedItem as Employee;
+            NewEmployeeWindow newEmployeeWindow = new NewEmployeeWindow(employee);
+            var result = newEmployeeWindow.ShowDialog();
+
+            if (result == true)
+            {
+                context.SaveChanges();
+                newEmployeeWindow.Close();
+            }
+            else
+            {
+                // вернуть начальное значение
+                context.Entry(employee).Reload();
+                // перегрузить DataContext
+                dGrid.DataContext = null;
+                dGrid.DataContext = context.Employees.Local;
+            }
         }
     }
 }
